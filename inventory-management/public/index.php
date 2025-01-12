@@ -1,11 +1,11 @@
 <?php
 
 require_once __DIR__ . '/../autoload.php';
+require_once __DIR__ . '/../config/router.php';
 
 $routes = require_once __DIR__ . '/../config/routes.php';
 
 
-use Config\DataBase;
 use Config\Router;
 
 $router = new Router($routes);

@@ -1,32 +1,34 @@
 <?php
 
  # Handle actions related to products (CRUD)
-
- // File: app/controllers/ProductController.php
 namespace App\Controllers;
 
+use App\Controllers\BaseController;
 use App\Models\Product;
 
-class ProductController
+
+class ProductController extends BaseController
 {
     public function index()
     {
         // Fetch products from the model
         $products = Product::getAll();
 
-        // Render the product index view
-        include __DIR__ . '/../views/product/index.php';  
+        
+        ob_start(); 
+        include __DIR__ . '/../views/product/index.php'; 
+        $content = ob_get_clean(); 
 
-        return $products;
+        include __DIR__ . '/../views/layout/layout.php'; 
     }
 
-    public function edit($id)
+    public function add()
     {
         // // Edit product logic
         // $product = Product::getById($id);
 
-        // // Render the edit view
-        // include __DIR__ . '/../views/product/edit.php';
+        // Render the edit view
+        include __DIR__ . '/../views/product/add.php';
     }
 }
 
