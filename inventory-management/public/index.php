@@ -1,4 +1,22 @@
 <?php
+
+require_once __DIR__ . '/../autoload.php';
+
+$routes = require_once __DIR__ . '/../config/routes.php';
+
+
+use Config\DataBase;
+use Config\Router;
+
+$router = new Router($routes);
+$router->run();
+
+
+
+
+
+
+
 /*
 /inventory-management/
 │
@@ -26,6 +44,8 @@
 │   │   └── layout/             # Base layout for common HTML structure
 │   │       └── header.php      # Header section (e.g., navigation menu)
 │   │       └── footer.php      # Footer section (e.g., copyright)
+|   ├── helpers/
+|   |       ├── debugger.php
 │
 ├── public/                    # Publicly accessible files
 │   ├── assets/                # External assets (CSS, JS, images)
