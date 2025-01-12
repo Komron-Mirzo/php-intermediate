@@ -12,13 +12,29 @@ class Router
         $this->routes = $routes;
     }
 
+
+
     public function run(): void
     {
-          // Get the full request URL, and remove the base public directory
+        // Get the full request URL
         $url = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
-        // Adjust the URL to remove the "public" directory from the request path
-        $url = str_replace('php-intermediate/inventory-management/public/', '', $url);
+        // Dynamically determine the base path
+        $basePath = trim(dirname($_SERVER['SCRIPT_NAME']), '/');
+
+        // Remove the base path from the URL
+        if (!empty($basePath) && strpos($url, $basePath) === 0) {
+            $url = substr($url, strlen($basePath));
+        }
+
+        $url = trim($url, '/');
+
+        if ($url === '') {
+            $url = 'dashboard';
+        }
+        
+
+
         
     
 

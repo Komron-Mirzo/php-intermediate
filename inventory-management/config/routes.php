@@ -1,6 +1,10 @@
 <?php
 
 $routes = [
+    'index.php' => [
+        'controller' => 'DashboardController',
+        'method' => 'index',
+    ],
     'dashboard' => [
         'controller' => 'DashboardController',
         'method' => 'index',
