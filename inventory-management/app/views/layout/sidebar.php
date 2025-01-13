@@ -3,7 +3,7 @@
     <nav class="menu">
         <ul>
             <?php foreach ($this->routes as $routeKey => $route): ?>
-                <?php if ($routeKey !== 'settings' && $routeKey !== 'logout' && $routeKey !== 'index.php'): ?>
+                <?php if ($routeKey === 'dashboard' || $routeKey === 'products' || $routeKey === 'categories' || $routeKey === 'users'): ?>
                     <li><a href="<?php echo BASE_URL . 'public/' . $routeKey; ?>"><?php echo ucfirst($routeKey); ?></a></li>
                 <?php endif ?>
             <?php endforeach; ?>

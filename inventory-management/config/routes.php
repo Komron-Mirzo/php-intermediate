@@ -25,9 +25,17 @@ $routes = [
         'controller' => 'UserController',
         'method' => 'settings' 
     ],
+    'login' => [ 
+        'controller' => 'UserController',
+        'method' => 'login' 
+    ],
     'logout' => [ 
         'controller' => 'UserController',
         'method' => 'login' 
+    ],
+    'register' => [ 
+        'controller' => 'UserController',
+        'method' => 'register' 
     ],
     
 ];
