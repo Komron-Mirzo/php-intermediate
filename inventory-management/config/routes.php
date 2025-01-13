@@ -17,6 +17,10 @@ $routes = [
         'controller' => 'CategoryController',
         'method' => 'index'
     ],
+    'categories/edit' => [
+        'controller' => 'CategoryController',
+        'method' => 'edit'
+    ],
     'users' => [
         'controller' => 'UserController',
         'method' => 'index'

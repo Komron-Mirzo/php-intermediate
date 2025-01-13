@@ -19,6 +19,7 @@
                 <th>No.</th>
                 <th> Category name </th>
                 <th> Category Description </th>
+                <th>Edit</th>
             </tr>
                 <?php
                     foreach($categories as $index => $category) {
@@ -32,8 +33,10 @@
                         echo '<td>';
                         echo $category['description'];
                         echo '</td>';
+                        echo '<td>';
+                        echo '<a href=categories/edit?edit_id=' . $category['category_id'] . '>' . '<img src="/php-intermediate/inventory-management/public/assets/images/edit.png" />' . '</a>';
+                        echo '</td>';
                         echo '</tr>';
-                        
                     }
                 ?>
         </table>
