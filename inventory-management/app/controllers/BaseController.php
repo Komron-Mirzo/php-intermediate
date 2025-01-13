@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Config\Router;
+use Config\Database;
 
 class BaseController
 {

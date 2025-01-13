@@ -102,6 +102,7 @@ nav.settings ul li a:hover {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 .content h1 {
@@ -159,6 +160,8 @@ nav.settings ul li a:hover {
 }
 
 .form-field {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 20px;
     text-align: left;
 }
@@ -184,7 +187,7 @@ nav.settings ul li a:hover {
     outline: none;
 }
 
-button[type="submit"] {
+button[type="submit"], input[type="submit"] {
     background-color: #3498db;
     color: white;
     border: none;
@@ -195,9 +198,65 @@ button[type="submit"] {
     transition: background-color 0.2s;
 }
 
-button[type="submit"]:hover {
+button[type="submit"]:hover, input[type="submit"]:hover {
     background-color: #2980b9;
 }
+
+/* Dashboard */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.dashboard-top {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.category-main {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+/* Table Styles */
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+td {
+    font-size: 14px;
+    color: #555;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
 
 
 

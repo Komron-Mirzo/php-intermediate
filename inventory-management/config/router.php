@@ -3,6 +3,7 @@
 # Define URL routes for controllers and actions
 namespace Config;
 
+
 class Router
 {
     private $routes;
@@ -11,8 +12,6 @@ class Router
     {
         $this->routes = $routes;
     }
-
-
 
     public function run(): void
     {
@@ -29,23 +28,26 @@ class Router
 
         $url = trim($url, '/');
 
+        // Default route if no specific route is requested
         if ($url === '') {
             $url = 'dashboard';
         }
-        
 
-
-        
-    
-
+        // Check if the route exists
         if (array_key_exists($url, $this->routes)) {
             $route = $this->routes[$url];
             $controllerClass = "App\\Controllers\\" . $route['controller'];
+            $method = $route['method'];
 
+            // Middleware-like checks (authentication)
+            if ($this->requiresAuth($url) && !$this->isAuthenticated()) {
+                // Redirect to login if the user is not authenticated
+                header('Location: login');
+                exit;
+            }
 
             if (class_exists($controllerClass)) {
                 $controller = new $controllerClass();
-                $method = $route['method'];
 
                 if (method_exists($controller, $method)) {
                     $controller->$method();
@@ -60,10 +62,35 @@ class Router
         }
     }
 
+    // Define routes that require authentication
+    private function requiresAuth(string $url): bool
+    {
+        $protectedRoutes = [
+            'dashboard',
+            'products',
+            'categories',
+            'users',
+            'settings',
+        ];
+
+        return in_array($url, $protectedRoutes);
+    }
+
+    // Check if the user is authenticated
+    private function isAuthenticated(): bool
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        return isset($_SESSION['user_id']);
+    }
+
     public function getRoutes(): array
     {
         return $this->routes;
     }
 }
+
 
 ?>

@@ -15,20 +15,21 @@
             <form action="" method="POST">
                 <div class="form-field">
                     <label for="register_name">Name *</label>
-                    <input type="text" name="register_name" id="register_name">
+                    <input type="text" name="register_name" id="register_name" required>
                 </div>
                 <div class="form-field">
                     <label for="register_email">Email *</label>
-                    <input type="text" name="register_email" id="register_email">
+                    <input type="text" name="register_email" id="register_email" required>
                 </div>
                 <div class="form-field">
                     <label for="register_password">Password *</label>
-                    <input type="password" name="register_password" id="register_password">
+                    <input type="password" name="register_password" id="register_password" required>
                 </div>
                 <div class="form-field">
                     <label for="confirm_password">Confirm Password *</label>
-                    <input type="password" name="confirm_password" id="confirm_password">
+                    <input type="password" name="confirm_password" id="confirm_password" required>
                 </div>
+                <input type="submit" value="Register">
             </form>
         </div>
     </div>

@@ -17,7 +17,7 @@
             <div class="header">
                 <?php include __DIR__ . '/top.php'; ?>
             </div>
-            <div class="content">
+            <div class="main-container">
                 <?php echo $content; ?>
             </div>
         </div>

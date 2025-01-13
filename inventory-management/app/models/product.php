@@ -12,12 +12,11 @@ use PDO;
         $db = Database::getInstance();
         $conn = $db->getConnection();
 
-        $query = $conn->query('SELECT * FROM products');
-        $products = $query->fetchAll(PDO::FETCH_ASSOC);
-
+        $stmt = $conn->query('SELECT * FROM products');
+        $stmt->execute();
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $products;
         
-
     }
  }
  

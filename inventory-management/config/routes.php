@@ -31,7 +31,7 @@ $routes = [
     ],
     'logout' => [ 
         'controller' => 'UserController',
-        'method' => 'login' 
+        'method' => 'logout' 
     ],
     'register' => [ 
         'controller' => 'UserController',

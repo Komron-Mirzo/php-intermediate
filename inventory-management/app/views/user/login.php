@@ -14,17 +14,14 @@
             <h1>Login </h1>
             <form action="" method="POST">
                 <div class="form-field">
-                    <label for="login_name">Name *</label>
-                    <input type="text" name="login_name" id="login_name">
-                </div>
-                <div class="form-field">
                     <label for="login_email">Email *</label>
-                    <input type="text" name="login_email" id="login_email">
+                    <input type="text" name="login_email" id="login_email" required>
                 </div>
                 <div class="form-field">
                     <label for="login_password">Password *</label>
-                    <input type="password" name="login_password" id="login_password">
+                    <input type="password" name="login_password" id="login_password" required>
                 </div>
+                <input type="submit" value="Login">
             </form>
         </div>
     </div>
