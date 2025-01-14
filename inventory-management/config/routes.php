@@ -13,6 +13,14 @@ $routes = [
         'controller' => 'ProductController',
         'method' => 'index'
     ],
+    'products/add' => [
+        'controller' => 'ProductController',
+        'method' => 'add'
+    ],
+    'products/edit' => [
+        'controller' => 'ProductController',
+        'method' => 'edit'
+    ],
     'categories' => [
         'controller' => 'CategoryController',
         'method' => 'index'

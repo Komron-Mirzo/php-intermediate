@@ -108,6 +108,8 @@ nav.settings ul li a:hover {
 .content h1 {
     font-size: 24px;
     margin-bottom: 20px;
+    display: flex;
+    gap: 1rem;
 }
 
 .content p {
@@ -187,7 +189,53 @@ nav.settings ul li a:hover {
     outline: none;
 }
 
-button[type="submit"], input[type="submit"] {
+
+.form-field select {
+    width: 100%; 
+    padding: 10px; 
+    font-size: 16px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    background-color: #fff; 
+    transition: border-color 0.2s; 
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    cursor: pointer; 
+}
+
+.form-field select:focus {
+    border-color: #3498db; 
+    outline: none; 
+}
+
+.form-field select option {
+    padding: 10px;
+}
+
+/* Optional: Add custom dropdown arrow */
+.form-field {
+    position: relative; 
+}
+
+.form-field select {
+    padding-right: 30px; 
+}
+
+.form-field.select::after {
+    content: "▼"; 
+    position: absolute;
+    top: 70%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none; 
+    color: #333; 
+    font-size: 12px;
+}
+
+
+
+button[type="submit"], input[type="submit"], button {
     background-color: #3498db;
     color: white;
     border: none;
@@ -198,7 +246,7 @@ button[type="submit"], input[type="submit"] {
     transition: background-color 0.2s;
 }
 
-button[type="submit"]:hover, input[type="submit"]:hover {
+button[type="submit"]:hover, input[type="submit"]:hover, button:hover {
     background-color: #2980b9;
 }
 
@@ -257,7 +305,17 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
+.container-50 {
+    width: 50%;
+}
 
+/* Products Table */
+.products-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 
 
 /* Responsive Design */

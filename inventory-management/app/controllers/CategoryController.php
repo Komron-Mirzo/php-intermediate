@@ -4,6 +4,7 @@
 
 namespace App\Controllers;
 use App\Controllers\BaseController;
+use App\Helpers\Debugger;
 use App\Models\Category;
 use App\Helpers\Sanitizer;
 
@@ -11,7 +12,7 @@ class CategoryController extends BaseController
 {
     public function index()
     {
-
+        //Add new Category
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = Sanitizer::sanitizeString($_POST['category_name']) ?? '';
             $description = Sanitizer::sanitizeString($_POST['category_description']) ?? '';
@@ -21,7 +22,21 @@ class CategoryController extends BaseController
             }
         }
 
+        //Get All Categories to show
         $categories = Category::getAll();
+
+        //Get the delete_id from GET query
+        $delete_id = $_GET['delete_id'] ?? '';
+
+        //Delete clicked category
+        if (!empty($delete_id)) {
+            Category::delete($delete_id);
+           
+            // Redirect back to the same page without query parameters
+            header("Location: " . strtok($_SERVER['REQUEST_URI'], '?'));
+            exit; // Ensure no further code runs after redirection
+        }
+
 
         ob_start(); 
         include __DIR__ . '/../views/category/index.php'; 
@@ -33,16 +48,25 @@ class CategoryController extends BaseController
     public function edit()
     {
 
+        //Edit the Category name and Description
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = Sanitizer::sanitizeString($_POST['category_name']) ?? '';
             $description = Sanitizer::sanitizeString($_POST['category_description']) ?? '';
+            $category_id = $_GET['edit_id'] ?? '';
 
-            if (!empty($name) && !empty($description)) {
-                Category::add($name, $description);
+            if (!empty($name) && !empty($description) && !empty($category_id)) {
+                Category::edit($name, $description, $category_id);
             }
         }
+        //Get the edit and delete GET queries
+        $id = $_GET['edit_id'] ?? '';
+        
 
-        $categories = Category::getAll();
+        //Get current category and show within form
+        if (!empty($id)) {
+            $currentCategory = Category::getCurrent($id);
+        }
+
 
         ob_start(); 
         include __DIR__ . '/../views/category/edit.php'; 

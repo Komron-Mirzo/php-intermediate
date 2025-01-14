@@ -20,6 +20,7 @@
                 <th> Category name </th>
                 <th> Category Description </th>
                 <th>Edit</th>
+                <th>Delete</th>
             </tr>
                 <?php
                     foreach($categories as $index => $category) {
@@ -34,7 +35,10 @@
                         echo $category['description'];
                         echo '</td>';
                         echo '<td>';
-                        echo '<a href=categories/edit?edit_id=' . $category['category_id'] . '>' . '<img src="/php-intermediate/inventory-management/public/assets/images/edit.png" />' . '</a>';
+                        echo '<a href=categories/edit?edit_id=' . $category['category_id'] . '>' . '<img width="20" height="20" src="/php-intermediate/inventory-management/public/assets/images/edit.png" />' . '</a>';
+                        echo '</td>';
+                        echo '<td>';
+                        echo '<a href=?delete_id=' . $category['category_id'] . '>' . '<img width="24" height="24" src="/php-intermediate/inventory-management/public/assets/images/delete.png" />' . '</a>';
                         echo '</td>';
                         echo '</tr>';
                     }
