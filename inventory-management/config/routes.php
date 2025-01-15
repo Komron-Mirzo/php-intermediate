@@ -33,6 +33,10 @@ $routes = [
         'controller' => 'UserController',
         'method' => 'index'
     ],
+    'users/edit' => [
+        'controller' => 'UserController',
+        'method' => 'settings'
+    ],
     'settings' => [ 
         'controller' => 'UserController',
         'method' => 'settings' 

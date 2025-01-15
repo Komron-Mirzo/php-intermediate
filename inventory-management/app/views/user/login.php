@@ -23,6 +23,10 @@
                 </div>
                 <input type="submit" value="Login">
             </form>
+            <div class="bottom" style="margin-top: 1rem">
+                <span style="margin-right: 1rem; ">No Account?</span><a href="register">Signup</a>
+            </div>
+            
         </div>
     </div>
     

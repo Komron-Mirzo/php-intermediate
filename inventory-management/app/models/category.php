@@ -21,11 +21,24 @@ class Category {
         $stmt->execute();
     }
 
-    public static function getAll () {
+    public static function getAll() {
+        $db= Database::getInstance();
+        $conn = $db->getConnection();
+
+        $stmt = $conn->query('SELECT * FROM categories');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getAllOffset ($limit, $offset) {
         $db = Database::getInstance();
         $conn = $db->getConnection();
 
-        $stmt = $conn->prepare('SELECT * FROM categories'); 
+        $stmt = $conn->prepare('SELECT * FROM categories
+                                ORDER BY category_id DESC
+                                LIMIT :limit OFFSET :offset');
+        $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -62,6 +75,15 @@ class Category {
         $stmt->bindParam(':category_id', $category_id);
         $stmt->execute();
       
+    }
+
+    public static function getTotalCategoryCount () {
+        $db = Database::getInstance();
+        $conn = $db->getConnection();
+
+        $stmt = $conn->query('SELECT COUNT(*) FROM categories');
+        $stmt->execute();
+        return $stmt->fetchColumn();
     }
 
 

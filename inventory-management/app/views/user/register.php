@@ -31,6 +31,9 @@
                 </div>
                 <input type="submit" value="Register">
             </form>
+            <div class="bottom" style="margin-top: 1rem">
+                <span style="margin-right: 1rem; ">Already registered?</span><a href="login">Login</a>
+            </div>
         </div>
     </div>
     

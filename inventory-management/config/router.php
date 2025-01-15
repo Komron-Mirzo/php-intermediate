@@ -65,13 +65,26 @@ class Router
     // Define routes that require authentication
     private function requiresAuth(string $url): bool
     {
-        $protectedRoutes = [
+        $protectedAdminRoutes = [
             'dashboard',
             'products',
             'categories',
             'users',
             'settings',
         ];
+
+        $protectedUserRoutes = [
+            'dashboard',
+            'products',
+            'categories',
+            'settings',
+        ];
+
+        if ($this->isAuthenticated() && $this->isAdmin()){
+            $protectedRoutes = $protectedAdminRoutes;
+        } else {
+            $protectedRoutes = $protectedUserRoutes;
+        }
 
         return in_array($url, $protectedRoutes);
     }
@@ -84,6 +97,14 @@ class Router
         }
 
         return isset($_SESSION['user_id']);
+    }
+
+    private function isAdmin() : bool {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        return isset($_SESSION['user_id']) && isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
     }
 
     public function getRoutes(): array

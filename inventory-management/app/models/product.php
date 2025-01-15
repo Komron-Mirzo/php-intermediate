@@ -7,6 +7,7 @@ use Config\Database;
 use PDO;
 
  class Product {
+    
     public static function getAll ($limit, $offset) {
         $db = Database::getInstance();
         $conn = $db->getConnection();
@@ -14,6 +15,7 @@ use PDO;
         $stmt = $conn->prepare('SELECT products.name AS product_name, products.description, products.price, products.category_id, products.product_id, categories.name AS category_name
                               FROM products
                               INNER JOIN categories ON products.category_id = categories.category_id
+                              ORDER BY products.product_id DESC
                               LIMIT :limit OFFSET :offset');
         $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
@@ -59,17 +61,18 @@ use PDO;
 
     }
 
-    public static function editProduct ($name, $description, $price, $category_id) {
+    public static function editProduct ($name, $description, $price, $category_id, $product_id) {
         $db = Database::getInstance();
         $conn = $db->getConnection();
 
         $stmt = $conn->prepare('UPDATE products
                                 SET name = :name, description = :description, price = :price, category_id = :category_id
-                                WHERE category_id = :category_id');
+                                WHERE product_id = :product_id');
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':category_id', $category_id);
+        $stmt->bindParam(':product_id', $product_id);
         $stmt->execute();
 
     }

@@ -44,6 +44,8 @@
                     }
                 ?>
         </table>
+
+        <?php include dirname(__DIR__, 1) . '/layout/pages.php';  ?>
        
     </div>
 </div>

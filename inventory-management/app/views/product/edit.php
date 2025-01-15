@@ -17,6 +17,9 @@
                 <label for="product_category">Product name</label>
                 <select name="product_category" id="product_category" required>
                     <?php
+
+                   
+
                         foreach ($categories as $category) {
                             if ($category['category_id'] === $current_product['category_id']){
                                 $selected = 'selected';

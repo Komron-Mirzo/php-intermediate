@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+body > pre {
+    margin-left: 260px;
+}
+
 html, body {
     height: 100%;
 }
@@ -263,7 +267,7 @@ button[type="submit"]:hover, input[type="submit"]:hover, button:hover {
     gap: 2rem;
 }
 
-.category-main {
+.category-main, .user-main {
     display: flex;
     flex-direction: row;
     gap: 2rem;

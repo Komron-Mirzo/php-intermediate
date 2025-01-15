@@ -7,6 +7,7 @@ use App\Controllers\BaseController;
 use App\Helpers\Debugger;
 use App\Models\Category;
 use App\Helpers\Sanitizer;
+use App\Helpers\Pagination;
 
 class CategoryController extends BaseController
 {
@@ -22,8 +23,15 @@ class CategoryController extends BaseController
             }
         }
 
-        //Get All Categories to show
-        $categories = Category::getAll();
+
+        $pagination_data = $this->getAllCategories(5);
+        $categories = $pagination_data['categories'];
+        $pagination = $pagination_data['pagination'];
+        $total_page = $pagination['total_page'];
+        $current_page = $pagination['current_page'];
+        $prev_page = $pagination['prev_page'];
+        $next_page = $pagination['next_page'];
+
 
         //Get the delete_id from GET query
         $delete_id = $_GET['delete_id'] ?? '';

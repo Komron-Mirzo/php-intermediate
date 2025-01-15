@@ -13,6 +13,21 @@ class UserController extends BaseController
 {
     public function index()
     {
+        // Display all users with pagination
+        $pagination_data = $this->getAllUsers(5);
+        $users = $pagination_data['users'];
+        $pagination = $pagination_data['pagination'];
+
+        
+        $item_offset = $pagination['item_offset'];
+        $total_page = $pagination['total_page'];
+        $current_page = $pagination['current_page'];
+        $prev_page = $pagination['prev_page'];
+        $next_page = $pagination['next_page'];
+
+        // Get current user
+
+
         ob_start(); 
         include __DIR__ . '/../views/user/index.php'; 
         $content = ob_get_clean(); 
@@ -23,6 +38,14 @@ class UserController extends BaseController
 
     public function settings()
     {
+        // Get Current User
+        $user_id = $_SESSION['user_id'] ?? 1;
+        $current_user = User::getCurrentUser($user_id);
+
+        // Get All User roles
+        $user_roles = User::getAllUserRoles();
+
+
         ob_start(); 
         include __DIR__ . '/../views/user/settings.php'; 
         $content = ob_get_clean(); 
@@ -41,6 +64,7 @@ class UserController extends BaseController
             if (!empty($email) && password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['user_role'] = $user['role'];
                 Header('Location: dashboard');
             }
 
@@ -82,7 +106,6 @@ class UserController extends BaseController
         header("Location: login");
         exit;
     }
-
 
 
     public function register()
