@@ -7,13 +7,16 @@ use Config\Database;
 use PDO;
 
  class Product {
-    public static function getAll () {
+    public static function getAll ($limit, $offset) {
         $db = Database::getInstance();
         $conn = $db->getConnection();
 
-        $stmt = $conn->query('SELECT products.name AS product_name, products.description, products.price, products.category_id, products.product_id, categories.name AS category_name
+        $stmt = $conn->prepare('SELECT products.name AS product_name, products.description, products.price, products.category_id, products.product_id, categories.name AS category_name
                               FROM products
-                              INNER JOIN categories ON products.category_id = categories.category_id;');
+                              INNER JOIN categories ON products.category_id = categories.category_id
+                              LIMIT :limit OFFSET :offset');
+        $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
         $stmt->execute();
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $products;
@@ -69,6 +72,15 @@ use PDO;
         $stmt->bindParam(':category_id', $category_id);
         $stmt->execute();
 
+    }
+
+    public static function getTotalProductCount () {
+        $db = Database::getInstance();
+        $conn = $db->getConnection();
+
+        $stmt = $conn->query('SELECT COUNT(*) FROM products');
+        $total = $stmt->fetchColumn();
+        return $total;
     }
 
  }

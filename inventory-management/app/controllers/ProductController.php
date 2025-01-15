@@ -7,15 +7,29 @@ use App\Controllers\BaseController;
 use App\Models\Product;
 use App\Models\Category;
 use App\Helpers\Sanitizer;
+use App\Helpers\Pagination;
 use App\Helpers\Debugger;
 
 
 class ProductController extends BaseController
 {
     public function index()
-    {
-        // Fetch products from the model
-        $products = Product::getAll();
+    {       
+       
+
+
+        // Get all paginated products
+        $total_products_count = Product::getTotalProductCount();
+        $current_page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1; 
+        $pagination = new Pagination(10, $current_page);
+        $total_page = $pagination->getPageTotal($total_products_count);
+        $prev_page = $current_page > 1 ? $current_page - 1 : null;
+        $next_page = $current_page < $total_page ? $current_page + 1 : null;
+        $item_limit = $pagination->getItemPerPage();
+        $item_offset = $pagination->getItemOffset();
+         
+        // Get all products for current page
+        $products = Product::getAll($item_limit, $item_offset);
 
 
         // Delete product
