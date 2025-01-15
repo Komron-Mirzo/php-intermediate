@@ -39,7 +39,17 @@ class UserController extends BaseController
     public function settings()
     {
         // Get Current User
-        $user_id = $_SESSION['user_id'] ?? 1;
+        $get = [
+            'admin' => $_SESSION['user_id'] ?? 1,
+            'edit_id' => $_GET['edit_id'] ?? ''
+        ];
+
+        if (!empty($get['edit_id'])) {
+            $user_id = $_GET['edit_id'];
+        } else {
+            $user_id = $_SESSION['user_id'];
+        }
+        
         $current_user = User::getCurrentUser($user_id);
 
         // Get All User roles

@@ -1,6 +1,6 @@
 <div class="user-main">
     <div class="container-50 user-left content">
-        <h1> <a href="<?php echo BASE_URL . 'public/' . 'categories'; ?>"> <img  width="32" height="32" src="/php-intermediate/inventory-management/public/assets/images/back.png" /> </a> Edit user</h1>
+        <h1> <a href="<?php echo BASE_URL . 'public/' . 'users'; ?>"> <img  width="32" height="32" src="/php-intermediate/inventory-management/public/assets/images/back.png" /> </a> Edit user</h1>
         <form action="" method="POST">
             <input type="hidden" name="form_type" value="edit_user_info">
             <div class="form-field">
@@ -17,12 +17,15 @@
                     <select name="user_roles" id="user_roles">
                         <?php
                             foreach ($user_roles as $role) {
-                                if ($role['role'] === $_SESSION['user_role']){
-                                    $selected = 'selected';
-                                } else {
-                                    $selected = '';
+                                if (isset($_GET['edit_id']) && $_GET['edit_id'] !== $_SESSION['user_id']) {
+                                    if ($role['role'] !== 'admin'){
+                                        $selected = 'selected';
+                                    } else {
+                                        $selected = '';
+                                    }
                                 }
-                                echo '<option class="user-role ' . $selected . '" value="' . $role['role'] . '">' . $role['role'] . '</option>';
+                                    
+                                echo '<option class="user-role" ' . $selected . ' value="' . $role['role'] . '">' . $role['role'] . '</option>';
                             }
                             
                         ?>

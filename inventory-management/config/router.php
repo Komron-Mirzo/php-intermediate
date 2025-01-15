@@ -92,7 +92,8 @@ class Router
     {
         // Define protected routes for admin
         $adminOnlyRoutes = [
-            'users', // Only admins can access this route
+            'users',
+            'users/edit'
         ];
     
         return in_array($url, $adminOnlyRoutes);
@@ -103,6 +104,8 @@ class Router
         $protectedRoutes = [
             'dashboard',
             'products',
+            'products/edit',
+            'categories/edit',
             'categories',
             'settings',
         ];

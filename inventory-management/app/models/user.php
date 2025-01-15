@@ -36,7 +36,8 @@ class User {
         $db = Database::getInstance();
         $conn = $db->getConnection();
 
-        $stmt = $conn->query('SELECT * FROM users');
+        $stmt = $conn->prepare('SELECT * FROM users WHERE role = :role');
+        $stmt->bindValue(':role', 'user', PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -46,10 +47,12 @@ class User {
         $conn = $db->getConnection();
 
         $stmt = $conn->prepare('SELECT * FROM users
+                                WHERE role = :role
                                 ORDER BY user_id DESC
                                 LIMIT :limit OFFSET :offset');
         $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+        $stmt->bindValue(':role', 'user', PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -58,7 +61,8 @@ class User {
         $db = Database::getInstance();
         $conn = $db->getConnection();
 
-        $stmt = $conn->query('SELECT COUNT(*) FROM users');
+        $stmt = $conn->prepare('SELECT COUNT(*) FROM users WHERE role = :role');
+        $stmt->bindValue(':role', 'user', PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchColumn();
     }
