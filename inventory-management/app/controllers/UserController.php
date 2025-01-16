@@ -25,7 +25,19 @@ class UserController extends BaseController
         $prev_page = $pagination['prev_page'];
         $next_page = $pagination['next_page'];
 
-        // Get current user
+
+
+       // Delete user 
+        if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
+            
+            User::deleteUser($_GET['delete_id']);
+
+            unset($get['delete_id']);
+
+            header('Location: users');
+            exit();
+        }
+        
 
 
         ob_start(); 
@@ -35,13 +47,13 @@ class UserController extends BaseController
         include __DIR__ . '/../views/layout/layout.php'; 
     }
 
-
     public function settings()
     {
         // Get Current User
         $get = [
             'admin' => $_SESSION['user_id'] ?? 1,
-            'edit_id' => $_GET['edit_id'] ?? ''
+            'edit_id' => $_GET['edit_id'] ?? '',
+            'delete_id' => $_GET['delete_id'] ?? ''
         ];
 
         if (!empty($get['edit_id'])) {
@@ -49,11 +61,39 @@ class UserController extends BaseController
         } else {
             $user_id = $_SESSION['user_id'];
         }
-        
+
+        // Get current user to fill edit form        
         $current_user = User::getCurrentUser($user_id);
 
-        // Get All User roles
+        // Get All User roles for dropdown user field
         $user_roles = User::getAllUserRoles();
+
+        debugger::debugPrint($current_user);
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            if ($_POST['form_type'] === 'edit_user_info') {
+                
+                $user_id = $get['edit_id'] ?? $current_user['user_id'];
+                $username = Sanitizer::sanitizeString($_POST['user_name']) ?? '';
+                $email = Sanitizer::sanitizeEmail($_POST['user_email']) ?? '';
+                $role = Sanitizer::sanitizeString($_POST['user_roles']) ?? '';
+
+                if (!empty($user_id) && !empty($username) && !empty($email) && !empty($role)) {
+                    User::editUserInfo($user_id, $username, $email, $role);
+
+                    $redirect = str_replace('/edit', '', $_SERVER['REDIRECT_URL']);
+
+                    header('Location: ' . $redirect);
+                }
+                
+
+            } else if ($_POST['form_type'] === 'edit_user_password') {
+
+            }
+        }
+
 
 
         ob_start(); 
@@ -69,17 +109,35 @@ class UserController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = Sanitizer::sanitizeEmail($_POST['login_email']) ?? '';
             $password = $_POST['login_password'] ?? '';
-            $user = User::login($email);
-
-            if (!empty($email) && password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['user_id'];
-                $_SESSION['username'] = $user['username'];
-                $_SESSION['user_role'] = $user['role'];
-                Header('Location: dashboard');
+        
+            // Check if both email and password are provided
+            if (!empty($email) && !empty($password)) {
+                $user = User::login($email);
+        
+                // Check if the user exists (i.e., the login returned an array)
+                if (is_array($user)) {
+                    // Now verify the password only if the user exists
+                    if (password_verify($password, $user['password'])) {
+                        // Password is correct, log the user in
+                        $_SESSION['user_id'] = $user['user_id'];
+                        $_SESSION['username'] = $user['username'];
+                        $_SESSION['user_role'] = $user['role'];
+                        header('Location: dashboard');
+                        exit();  // Always use exit() after header redirects
+                    } else {
+                        // Password is incorrect
+                        $error_message = "Incorrect password.";
+                    }
+                } else {
+                    // Email not found in the system
+                    $error_message = "User not found.";
+                }
+            } else {
+                // Handle the case where either email or password is empty
+                $error_message = "Please enter both email and password.";
             }
-
-           
         }
+        
         
 
         include __DIR__ . '/../views/user/login.php'; 
@@ -135,6 +193,7 @@ class UserController extends BaseController
         
         include __DIR__ . '/../views/user/register.php'; 
     }
+
 
 }
 

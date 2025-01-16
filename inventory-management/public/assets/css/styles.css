@@ -399,6 +399,11 @@ tr:hover {
     background-color: #3498db;
 }
 
+.error {
+    margin-top: 2rem;
+    color: rgba(190, 10, 64, 0.699);
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

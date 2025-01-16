@@ -6,6 +6,7 @@ namespace App\Models;
 use Config\Database;
 use App\Helpers\Debugger;
 use PDO;
+use PDOException;
 
 class User {
 
@@ -86,13 +87,43 @@ class User {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function editUserInfo ($username, $email, $role) {
+    public static function deleteUser ($user_id) {
         $db = Database::getInstance();
         $conn = $db->getConnection();
 
-        $stmt = $conn->prepare('INSERT INTO users (username, password, email)
-                               VALUES (:username, :role, :email);'); 
-               
+        try {
+
+            $conn->beginTransaction();
+
+            // Delete all user products
+            $stmt = $conn->prepare('DELETE FROM products WHERE user_id = :user_id');
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+
+            // Delete user  
+            $stmt = $conn->prepare('DELETE FROM users
+                                WHERE user_id = :user_id');
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $conn->commit();
+
+        } catch (PDOException $e) {
+            $conn->rollback();
+            throw $e;
+        }
+
+        
+    }
+
+    public static function editUserInfo ($user_id, $username, $email, $role) {
+        $db = Database::getInstance();
+        $conn = $db->getConnection();
+
+        $stmt = $conn->prepare('UPDATE users
+                                SET username = :username, role = :role, email = :email
+                                WHERE user_id = :user_id'); 
+        $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':role', $role);
         $stmt->bindParam(':email', $email);

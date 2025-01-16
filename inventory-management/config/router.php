@@ -105,6 +105,7 @@ class Router
             'dashboard',
             'products',
             'products/edit',
+            'products/add',
             'categories/edit',
             'categories',
             'settings',
@@ -120,6 +121,7 @@ class Router
     $publicRoutes = [
         'login',
         'register',
+        'logout'
     ];
 
     return in_array($url, $publicRoutes);

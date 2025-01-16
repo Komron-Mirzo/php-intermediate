@@ -26,6 +26,9 @@
             <div class="bottom" style="margin-top: 1rem">
                 <span style="margin-right: 1rem; ">No Account?</span><a href="register">Signup</a>
             </div>
+            <?php if (isset($error_message)): ?>
+                <div class="error"><?= $error_message; ?></div>
+            <?php endif; ?>
             
         </div>
     </div>
