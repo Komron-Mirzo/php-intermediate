@@ -68,29 +68,55 @@ class UserController extends BaseController
         // Get All User roles for dropdown user field
         $user_roles = User::getAllUserRoles();
 
-        debugger::debugPrint($current_user);
-
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+            $user_id = !empty($get['edit_id']) ? $get['edit_id'] : $current_user['user_id'];
+
             if ($_POST['form_type'] === 'edit_user_info') {
                 
-                $user_id = $get['edit_id'] ?? $current_user['user_id'];
                 $username = Sanitizer::sanitizeString($_POST['user_name']) ?? '';
                 $email = Sanitizer::sanitizeEmail($_POST['user_email']) ?? '';
                 $role = Sanitizer::sanitizeString($_POST['user_roles']) ?? '';
 
-                if (!empty($user_id) && !empty($username) && !empty($email) && !empty($role)) {
+                if (!empty($user_id) && !empty($username) && !empty($email) && !empty($role) && $current_user['role'] === 'admin') {
+
                     User::editUserInfo($user_id, $username, $email, $role);
-
                     $redirect = str_replace('/edit', '', $_SERVER['REDIRECT_URL']);
-
                     header('Location: ' . $redirect);
+                    
+                } else if (!empty($user_id) && !empty($username) && !empty($email) && $current_user['role'] === 'user') {
+
+                    User::editUserInfo($user_id, $username, $email, $current_user['role']);
+                    $redirect = str_replace('/edit', '', $_SERVER['REDIRECT_URL']);
+                    header('Location: ' . $redirect);
+
                 }
                 
 
             } else if ($_POST['form_type'] === 'edit_user_password') {
+                $old_password = Sanitizer::sanitizePassword($_POST['old_password']) ?? '';
+                $new_password = Sanitizer::sanitizePassword($_POST['new_password']) ?? '';
+                $new_password_confirm = Sanitizer::sanitizePassword($_POST['confirm_new_password']) ?? '';
 
+
+                if (password_verify($old_password, $current_user['password'])) {
+
+                    if ($new_password === $new_password_confirm) {
+
+                        $new_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+                        User::setNewPassword($user_id, $new_password);
+
+                        echo 'New password successfully set';
+                    
+
+                        // $redirect = str_replace('/edit', '', $_SERVER['REDIRECT_URL']);
+
+                        // header('Location: ' . $redirect);
+                    }
+
+                }
             }
         }
 

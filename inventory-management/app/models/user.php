@@ -130,6 +130,18 @@ class User {
         $stmt->execute();
     }
 
+    public static function setNewPassword ($user_id, $new_password) {
+        $db = Database::getInstance();
+        $conn = $db->getConnection();
+
+        $stmt = $conn->prepare('UPDATE users
+                                SET password = :new_password
+                                WHERE user_id = :user_id;');
+        $stmt->bindParam(':new_password', $new_password);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+    }
+
 
 
 

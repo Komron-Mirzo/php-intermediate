@@ -404,6 +404,22 @@ tr:hover {
     color: rgba(190, 10, 64, 0.699);
 }
 
+/* Dashbaord styles */
+
+.card-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: fit-content;
+}
+
+.card-text {
+    font-weight: 500;
+    color: #667085;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
