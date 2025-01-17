@@ -1,4 +1,4 @@
-# PHP Applications Intermediate Level OOP, MVC
+# PHP Projects Intermediate Level OOP, MVC
 These are the intermediate level PHP projects using OOP principles and custom MVC framework. All projects include the database and necessary assets.
 
 ---
