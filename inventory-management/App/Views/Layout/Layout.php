@@ -11,11 +11,11 @@
 
     <div id="main-container">
         <div class="sidebar">
-            <?php include __DIR__ . '/sidebar.php'; ?>
+            <?php include __DIR__ . '/Sidebar.php'; ?>
         </div>
         <div class="content-area">
             <div class="header">
-                <?php include __DIR__ . '/top.php'; ?>
+                <?php include __DIR__ . '/Top.php'; ?>
             </div>
             <div class="main-container">
                 <?php echo $content; ?>

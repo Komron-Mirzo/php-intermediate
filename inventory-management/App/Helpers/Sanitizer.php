@@ -1,6 +1,6 @@
 <?php
 
-// app/helpers/Sanitizer.php
+// App/helpers/Sanitizer.php
 namespace App\Helpers;
 
 class Sanitizer

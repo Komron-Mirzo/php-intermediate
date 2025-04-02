@@ -15,7 +15,7 @@ class BaseController
     public function __construct()
     {
         // Load the routes configuration and make it available to all controllers
-        $router = new Router(require __DIR__ . '/../../config/routes.php');
+        $router = new Router(require __DIR__ . '/../../Config/Routes.php');
         $this->routes = $router->getRoutes();
     }
 

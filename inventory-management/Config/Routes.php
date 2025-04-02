@@ -3,55 +3,55 @@
 $routes = [
     'index.php' => [
         'controller' => 'DashboardController',
-        'method' => 'index',
+        'method' => 'Index',
     ],
     'dashboard' => [
         'controller' => 'DashboardController',
-        'method' => 'index',
+        'method' => 'Index',
     ],
     'products' => [
         'controller' => 'ProductController',
-        'method' => 'index'
+        'method' => 'Index'
     ],
     'products/add' => [
         'controller' => 'ProductController',
-        'method' => 'add'
+        'method' => 'Add'
     ],
     'products/edit' => [
         'controller' => 'ProductController',
-        'method' => 'edit'
+        'method' => 'Edit'
     ],
     'categories' => [
         'controller' => 'CategoryController',
-        'method' => 'index'
+        'method' => 'Index'
     ],
     'categories/edit' => [
         'controller' => 'CategoryController',
-        'method' => 'edit'
+        'method' => 'Edit'
     ],
     'users' => [
         'controller' => 'UserController',
-        'method' => 'index'
+        'method' => 'Index'
     ],
     'users/edit' => [
         'controller' => 'UserController',
-        'method' => 'settings'
+        'method' => 'Settings'
     ],
     'settings' => [ 
         'controller' => 'UserController',
-        'method' => 'settings' 
+        'method' => 'Settings' 
     ],
     'login' => [ 
         'controller' => 'UserController',
-        'method' => 'login' 
+        'method' => 'Login' 
     ],
     'logout' => [ 
         'controller' => 'UserController',
-        'method' => 'logout' 
+        'method' => 'Logout' 
     ],
     'register' => [ 
         'controller' => 'UserController',
-        'method' => 'register' 
+        'method' => 'Register' 
     ],
     
 ];

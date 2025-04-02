@@ -16,10 +16,10 @@ class DashboardController extends BaseController {
         $total_products = Product::getTotalProductCount();
 
         ob_start(); 
-        include __DIR__ . '/../views/dashboard.php'; 
+        include __DIR__ . '/../Views/Dashboard.php'; 
         $content = ob_get_clean(); 
 
-        include __DIR__ . '/../views/layout/layout.php'; 
+        include __DIR__ . '/../Views/Layout/Layout.php'; 
     }
 }
 

@@ -41,10 +41,10 @@ class UserController extends BaseController
 
 
         ob_start(); 
-        include __DIR__ . '/../views/user/index.php'; 
+        include __DIR__ . '/../Views/User/Index.php'; 
         $content = ob_get_clean(); 
 
-        include __DIR__ . '/../views/layout/layout.php'; 
+        include __DIR__ . '/../Views/Layout/Layout.php'; 
     }
 
     public function settings()
@@ -123,10 +123,10 @@ class UserController extends BaseController
 
 
         ob_start(); 
-        include __DIR__ . '/../views/user/settings.php'; 
+        include __DIR__ . '/../Views/User/Settings.php'; 
         $content = ob_get_clean(); 
 
-        include __DIR__ . '/../views/layout/layout.php'; 
+        include __DIR__ . '/../Views/Layout/Layout.php'; 
     }
 
     public function login()
@@ -166,7 +166,7 @@ class UserController extends BaseController
         
         
 
-        include __DIR__ . '/../views/user/login.php'; 
+        include __DIR__ . '/../Views/User/Login.php'; 
     }
 
     public function logout()
@@ -217,7 +217,7 @@ class UserController extends BaseController
         }
 
         
-        include __DIR__ . '/../views/user/register.php'; 
+        include __DIR__ . '/../Views/User/Register.php'; 
     }
 
 

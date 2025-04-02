@@ -1,9 +1,10 @@
 <?php
 
-require_once __DIR__ . '/config/config.php';
+require_once __DIR__ . '/Config/Config.php';
 
 
 spl_autoload_register(function($class) {
+
     // Replace namespace separator with directory separator and add '.php' extension
     $path = str_replace('\\', '/', $class) . '.php';
 

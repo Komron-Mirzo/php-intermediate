@@ -47,10 +47,10 @@ class CategoryController extends BaseController
 
 
         ob_start(); 
-        include __DIR__ . '/../views/category/index.php'; 
+        include __DIR__ . '/../Views/Category/Index.php'; 
         $content = ob_get_clean(); 
 
-        include __DIR__ . '/../views/layout/layout.php'; 
+        include __DIR__ . '/../Views/Layout/Layout.php'; 
     }
 
     public function edit()
@@ -77,10 +77,10 @@ class CategoryController extends BaseController
 
 
         ob_start(); 
-        include __DIR__ . '/../views/category/edit.php'; 
+        include __DIR__ . '/../Views/Category/Edit.php'; 
         $content = ob_get_clean(); 
 
-        include __DIR__ . '/../views/layout/layout.php'; 
+        include __DIR__ . '/../Views/Layout/Layout.php'; 
     }
 
 }

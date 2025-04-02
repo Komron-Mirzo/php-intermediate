@@ -55,10 +55,10 @@ class ProductController extends BaseController
 
         
         ob_start(); 
-        include __DIR__ . '/../views/product/index.php'; 
+        include __DIR__ . '/../Views/Product/Index.php'; 
         $content = ob_get_clean(); 
 
-        include __DIR__ . '/../views/layout/layout.php'; 
+        include __DIR__ . '/../Views/Layout/Layout.php'; 
 
     }
 
@@ -89,10 +89,10 @@ class ProductController extends BaseController
 
 
         ob_start(); 
-        include __DIR__ . '/../views/product/add.php'; 
+        include __DIR__ . '/../Views/Product/Add.php'; 
         $content = ob_get_clean(); 
 
-        include __DIR__ . '/../views/layout/layout.php'; 
+        include __DIR__ . '/../Views/Layout/Layout.php'; 
     }
 
     public function edit() {
@@ -131,10 +131,10 @@ class ProductController extends BaseController
         
 
         ob_start(); 
-        include __DIR__ . '/../views/product/edit.php'; 
+        include __DIR__ . '/../Views/Product/Edit.php'; 
         $content = ob_get_clean(); 
 
-        include __DIR__ . '/../views/layout/layout.php'; 
+        include __DIR__ . '/../Views/Layout/Layout.php'; 
     }
 }
 

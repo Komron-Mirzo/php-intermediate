@@ -1,6 +1,6 @@
 <?php
 
-// app/Helpers/Debugger.php
+// App/Helpers/Debugger.php
 namespace App\Helpers;
 
 class Debugger {
